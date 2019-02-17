@@ -1,0 +1,11 @@
+Flask
+gunicorn
+itsdangerous
+Jinja2
+requests
+flask-restplus
+bs4
+praw
+pandas-datareader
+googlefinance
+dataclasses
