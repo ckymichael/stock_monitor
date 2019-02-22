@@ -113,7 +113,7 @@ function numberToColor(param) {
     return "#f4fffd";
   } else if (param.data.changed > 0) {
     return "#17af1c";
-  } else {
+  } else if (param.data.changed < 0) {
     return "#ff513e";
   }
 }
