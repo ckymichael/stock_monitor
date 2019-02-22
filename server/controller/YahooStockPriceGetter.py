@@ -20,3 +20,14 @@ class YahooStockPriceGetter(Resource):
         stock_data = self.YAHOO_STOCK_PRICE_CONNECTOR.get_latest_stock_price(stock_code)
 
         return stock_price_info_to_dict(stock_data)
+
+@ns_yahoo_stock_price.route('/yahoo-stock-code')
+class YahooStockCodeGetter(Resource):
+    STOCK_CODE = 'stockCode'
+    STOCK_CODE_PARSER = ns_yahoo_stock_price.parser()
+    STOCK_CODE_PARSER.add_argument(STOCK_CODE, type=str, help='stock code', location='query')
+    YAHOO_STOCK_PRICE_CONNECTOR = YahooStockPriceConnector()
+
+    def get(self) -> []:
+        stock_codes = self.YAHOO_STOCK_PRICE_CONNECTOR.get_all_stock_code()
+        return stock_codes
