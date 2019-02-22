@@ -139,6 +139,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var ag_grid_angular__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ag-grid-angular */ "./node_modules/ag-grid-angular/main.js");
 /* harmony import */ var ag_grid_angular__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(ag_grid_angular__WEBPACK_IMPORTED_MODULE_12__);
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _stock_monitor_dashboard_refresh_silder_refresh_silder_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./stock-monitor-dashboard/refresh-silder/refresh-silder.component */ "./src/app/stock-monitor-dashboard/refresh-silder/refresh-silder.component.ts");
+
 
 
 
@@ -163,17 +165,19 @@ var AppModule = /** @class */ (function () {
                 _stock_monitor_dashboard_stock_monitor_dashboard_component__WEBPACK_IMPORTED_MODULE_7__["StockMonitorDashboardComponent"],
                 _stock_monitor_dashboard_stock_code_input_stock_code_input_component__WEBPACK_IMPORTED_MODULE_8__["StockCodeInputComponent"],
                 _stock_monitor_dashboard_stock_price_table_stock_price_table_component__WEBPACK_IMPORTED_MODULE_11__["StockPriceTableComponent"],
+                _stock_monitor_dashboard_refresh_silder_refresh_silder_component__WEBPACK_IMPORTED_MODULE_14__["RefreshSilderComponent"],
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
+                _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_10__["BrowserAnimationsModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_9__["FormsModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_9__["ReactiveFormsModule"],
                 _angular_common_http__WEBPACK_IMPORTED_MODULE_13__["HttpClientModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_9__["ReactiveFormsModule"],
-                _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_10__["BrowserAnimationsModule"],
                 _app_routing_module__WEBPACK_IMPORTED_MODULE_3__["AppRoutingModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_5__["MatFormFieldModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_5__["MatGridListModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_5__["MatSliderModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_5__["MatCardModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_5__["MatMenuModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_5__["MatIconModule"],
@@ -189,6 +193,60 @@ var AppModule = /** @class */ (function () {
         })
     ], AppModule);
     return AppModule;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/stock-monitor-dashboard/refresh-silder/refresh-silder.component.html":
+/*!**************************************************************************************!*\
+  !*** ./src/app/stock-monitor-dashboard/refresh-silder/refresh-silder.component.html ***!
+  \**************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<mat-slider\n  class=\"mat-refresh-slider\"\n  thumbLabel\n  tickInterval=\"1\"\n  [value]=value\n  [(ngModel)]=\"value\"\n  min=\"0\"\n  max=\"60\"></mat-slider>\n"
+
+/***/ }),
+
+/***/ "./src/app/stock-monitor-dashboard/refresh-silder/refresh-silder.component.scss":
+/*!**************************************************************************************!*\
+  !*** ./src/app/stock-monitor-dashboard/refresh-silder/refresh-silder.component.scss ***!
+  \**************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ".mat-refresh-slider {\n  width: inherit; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvc3RvY2stbW9uaXRvci1kYXNoYm9hcmQvcmVmcmVzaC1zaWxkZXIvQzpcXFVzZXJzXFxNYXJjb1xcV29ya3NwYWNlc1xcc3RvY2tNb25pdG9yXFxjbGllbnQvc3JjXFxhcHBcXHN0b2NrLW1vbml0b3ItZGFzaGJvYXJkXFxyZWZyZXNoLXNpbGRlclxccmVmcmVzaC1zaWxkZXIuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxlQUFjLEVBQ2YiLCJmaWxlIjoic3JjL2FwcC9zdG9jay1tb25pdG9yLWRhc2hib2FyZC9yZWZyZXNoLXNpbGRlci9yZWZyZXNoLXNpbGRlci5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5tYXQtcmVmcmVzaC1zbGlkZXIge1xyXG4gIHdpZHRoOiBpbmhlcml0O1xyXG59XHJcbiJdfQ== */"
+
+/***/ }),
+
+/***/ "./src/app/stock-monitor-dashboard/refresh-silder/refresh-silder.component.ts":
+/*!************************************************************************************!*\
+  !*** ./src/app/stock-monitor-dashboard/refresh-silder/refresh-silder.component.ts ***!
+  \************************************************************************************/
+/*! exports provided: RefreshSilderComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RefreshSilderComponent", function() { return RefreshSilderComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+
+
+var RefreshSilderComponent = /** @class */ (function () {
+    function RefreshSilderComponent() {
+        this.value = 5;
+    }
+    RefreshSilderComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-refresh-silder',
+            template: __webpack_require__(/*! ./refresh-silder.component.html */ "./src/app/stock-monitor-dashboard/refresh-silder/refresh-silder.component.html"),
+            styles: [__webpack_require__(/*! ./refresh-silder.component.scss */ "./src/app/stock-monitor-dashboard/refresh-silder/refresh-silder.component.scss")]
+        })
+    ], RefreshSilderComponent);
+    return RefreshSilderComponent;
 }());
 
 
@@ -274,7 +332,7 @@ var StockCodeInputComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-grid-list cols=\"4\" rowHeight=\"125px\">\n  <mat-grid-tile [colspan]=4 [rowspan]=1>\n    <mat-card style=\"width: 90%\">\n      <mat-grid-list cols=20 rows=1 rowHeight=\"75px\">\n        <mat-grid-tile [colspan]=19 [rowspan]=1>\n          <app-stock-code-input #stockCodeInput style=\"width: 100%\"></app-stock-code-input>\n        </mat-grid-tile>\n        <mat-grid-tile [colspan]=1 [rowspan]=1>\n          <button mat-raised-button color=\"primary\" (click)=\"stockSearchClicked($event, stockCodeInput, appStockPriceTable)\"><i class=\"material-icons\">search</i></button>\n        </mat-grid-tile>\n      </mat-grid-list>\n    </mat-card>\n  </mat-grid-tile>\n</mat-grid-list>\n\n<mat-grid-list cols=\"4\" rowHeight=\"800px\">\n  <mat-grid-tile [colspan]=4 [rowspan]=1>\n    <mat-card style=\"width: 90%;height: 90%\">\n      <app-stock-price-table #appStockPriceTable></app-stock-price-table>\n    </mat-card>\n  </mat-grid-tile>\n</mat-grid-list>\n"
+module.exports = "<mat-grid-list cols=\"4\" rowHeight=\"125px\" xmlns=\"http://www.w3.org/1999/html\">\n  <mat-grid-tile [colspan]=4 [rowspan]=2>\n    <mat-card style=\"width: 90%\">\n      <mat-grid-list cols=20 rows=1 rowHeight=\"55px\">\n        <mat-grid-tile [colspan]=19 [rowspan]=1>\n          <app-stock-code-input #stockCodeInput style=\"width: 100%\"></app-stock-code-input>\n        </mat-grid-tile>\n        <mat-grid-tile [colspan]=1 [rowspan]=1>\n          <button mat-raised-button color=\"primary\"\n                  (click)=\"stockSearchClicked($event, stockCodeInput, appStockPriceTable, refreshSlider)\"><i class=\"material-icons\">search</i>\n          </button>\n        </mat-grid-tile>\n        <mat-grid-tile [colspan]=15 [rowspan]=1>\n\n        </mat-grid-tile>\n        <mat-grid-tile [colspan]=5 [rowspan]=1>\n          <div style=\"position: absolute;right: 0px;bottom: 0px;height: 60%;\">\n            Refresh Interval\n            <app-refresh-silder #refreshSlider></app-refresh-silder>\n          </div>\n        </mat-grid-tile>\n      </mat-grid-list>\n    </mat-card>\n  </mat-grid-tile>\n\n</mat-grid-list>\n\n<mat-grid-list cols=\"4\" rowHeight=\"800px\">\n  <mat-grid-tile [colspan]=4 [rowspan]=1>\n    <mat-card style=\"width: 90%;height: 90%\">\n      <app-stock-price-table [intervalTime]=refreshSlider.value #appStockPriceTable></app-stock-price-table>\n    </mat-card>\n  </mat-grid-tile>\n</mat-grid-list>\n"
 
 /***/ }),
 
@@ -306,9 +364,9 @@ __webpack_require__.r(__webpack_exports__);
 var StockMonitorDashboardComponent = /** @class */ (function () {
     function StockMonitorDashboardComponent() {
     }
-    StockMonitorDashboardComponent.prototype.stockSearchClicked = function ($event, stockCodeInput, appStockPriceTable) {
+    StockMonitorDashboardComponent.prototype.stockSearchClicked = function ($event, stockCodeInput, appStockPriceTable, refreshSlider) {
         appStockPriceTable.addStockToMonitor(stockCodeInput.myControl.value);
-        console.log(stockCodeInput.myControl.value);
+        console.log(refreshSlider);
     };
     StockMonitorDashboardComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -367,7 +425,7 @@ var StockPriceService = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ag-grid-angular\n  #agGrid\n  style=\"width: 100%; height: 100%;\"\n  id=\"myGrid\"\n  class=\"ag-theme-balham\"\n  [columnDefs]=\"columnDefs\"\n  [rowData]=\"rowData\"\n  [animateRows]=\"true\"\n  [rowSelection]=\"rowSelection\"\n  [enableCellChangeFlash]=\"true\"\n  [enableSorting]=\"true\"\n  (gridReady)=\"onGridReady($event)\"\n></ag-grid-angular>\n"
+module.exports = "<ag-grid-angular\n  #agGrid\n  style=\"width: 100%; height: 100%;\"\n  id=\"myGrid\"\n  class=\"ag-theme-balham\"\n  [columnDefs]=\"columnDefs\"\n  [rowData]=\"rowData\"\n  [animateRows]=\"true\"\n  [rowSelection]=\"rowSelection\"\n  [enableCellChangeFlash]=\"true\"\n  [enableSorting]=\"true\"\n  (gridReady)=\"onGridReady($event)\"\n></ag-grid-angular>\n<button (click)=\"showInterval()\"></button>\n"
 
 /***/ }),
 
@@ -395,6 +453,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _service_stock_price_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./service/stock-price.service */ "./src/app/stock-monitor-dashboard/stock-price-table/service/stock-price.service.ts");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+
 
 
 
@@ -403,33 +463,52 @@ var StockPriceTableComponent = /** @class */ (function () {
         var _this = this;
         this.stockPriceService = stockPriceService;
         this.stockToMonitor = [];
+        this.intervalTime = 4000;
         this.columnDefs = [
             { headerName: "Stock Code", field: "stock_code" },
             { headerName: "Open", field: "open" },
             { headerName: "High", field: "high" },
             { headerName: "Low", field: "low" },
-            { headerName: "Close", field: "close" },
+            {
+                headerName: "Close", field: "close", cellStyle: function (params) {
+                    var color = numberToColor(params);
+                    return { "background-color": color };
+                }
+            },
+            { headerName: "Changed", field: "changed" },
             { headerName: "Volume", field: "volume" },
         ];
         this.rowData = [];
         this.rowSelection = "multiple";
-        setInterval(function () {
-            _this.stockToMonitor.forEach(function (stockCode) { return _this.stockPriceService.getStockPrice(stockCode).subscribe(function (stockPriceInfo) {
-                _this.addOrUpdateToTheTable(stockPriceInfo);
-            }, function (error1) {
-                console.error(error1);
-            }); });
-        }, 4000);
+        this.intervalObs = Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["interval"])(this.intervalTime * 1000).subscribe(function (value) {
+            return console.log("Refreshing time" + _this.intervalTime * 1000);
+        }, function (error1) { return console.error(error1); });
+        // setInterval(() => {
+        //   console.log(`Refreshing time${this.intervalTime}`);
+        //   // this.stockToMonitor.forEach(stockCode =>
+        //   //   this.stockPriceService.getStockPrice(stockCode).subscribe(
+        //   //   stockPriceInfo => {
+        //   //     this.addOrUpdateToTheTable(stockPriceInfo);
+        //   //   }, error1 => {
+        //   //     console.error(error1);
+        //   //   }
+        //   // ))
+        // }, this.intervalTime);
     }
     StockPriceTableComponent_1 = StockPriceTableComponent;
-    StockPriceTableComponent.prototype.ngOnInit = function () {
+    StockPriceTableComponent.prototype.setInterval1 = function (time) {
+        console.log("Change");
+        this.intervalTime = time;
+    };
+    StockPriceTableComponent.prototype.showInterval = function () {
+        console.log(this.intervalTime);
     };
     StockPriceTableComponent.prototype.addOrUpdateToTheTable = function (stockPriceInfo) {
         var rowNode = this.getIfExisted(stockPriceInfo);
         if (rowNode != null) {
             console.log("Update");
             var stockToUpdate = rowNode.data;
-            StockPriceTableComponent_1.setUpdatedStockInfo(stockToUpdate, rowNode.data);
+            StockPriceTableComponent_1.setUpdatedStockInfo(stockToUpdate, stockPriceInfo);
             // stockToUpdate.close = stockToUpdate.close - 1;
             this.gridApi.updateRowData({ update: [stockToUpdate] });
         }
@@ -458,13 +537,31 @@ var StockPriceTableComponent = /** @class */ (function () {
         this.gridColumnApi = params.columnApi;
     };
     StockPriceTableComponent.setUpdatedStockInfo = function (stockToUpdate, data) {
+        // console.log(stockToUpdate);
+        // console.log(data);
+        stockToUpdate.changed = data.close - stockToUpdate.close;
         stockToUpdate.close = data.close;
         stockToUpdate.high = data.high;
         stockToUpdate.low = data.low;
         stockToUpdate.open = data.open;
         stockToUpdate.volume = data.volume;
     };
+    StockPriceTableComponent.prototype.ngOnChanges = function (changes) {
+        var _this = this;
+        if (changes.hasOwnProperty("intervalTime")) {
+            this.intervalTime = changes.intervalTime.currentValue;
+            this.intervalObs.unsubscribe();
+            this.intervalObs = Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["interval"])(this.intervalTime * 1000).subscribe(function () {
+                console.log("refreshing time : " + _this.intervalTime);
+                _this.stockToMonitor.forEach(function (stockCode) { return _this.stockPriceService.getStockPrice(stockCode).subscribe(function (stockPriceInfo) { return _this.addOrUpdateToTheTable(stockPriceInfo); }, function (error1) { return console.error(error1); }); });
+            });
+        }
+    };
     var StockPriceTableComponent_1;
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])(),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Number)
+    ], StockPriceTableComponent.prototype, "intervalTime", void 0);
     StockPriceTableComponent = StockPriceTableComponent_1 = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-stock-price-table',
@@ -477,6 +574,18 @@ var StockPriceTableComponent = /** @class */ (function () {
     return StockPriceTableComponent;
 }());
 
+function numberToColor(param) {
+    console.log(param);
+    if (param.data.changed == 0 || param.data.changed == null) {
+        return "#f4fffd";
+    }
+    else if (param.data.changed > 0) {
+        return "#10ff1f";
+    }
+    else {
+        return "#ff513e";
+    }
+}
 
 
 /***/ }),
@@ -522,6 +631,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/platform-browser-dynamic */ "./node_modules/@angular/platform-browser-dynamic/fesm5/platform-browser-dynamic.js");
 /* harmony import */ var _app_app_module__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./app/app.module */ "./src/app/app.module.ts");
 /* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./environments/environment */ "./src/environments/environment.ts");
+/* harmony import */ var hammerjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! hammerjs */ "./node_modules/hammerjs/hammer.js");
+/* harmony import */ var hammerjs__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(hammerjs__WEBPACK_IMPORTED_MODULE_4__);
+
 
 
 
