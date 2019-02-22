@@ -296,7 +296,7 @@ __webpack_require__.r(__webpack_exports__);
 var StockCodeInputComponent = /** @class */ (function () {
     function StockCodeInputComponent() {
         this.myControl = new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"]();
-        this.options = ['One', 'Two', 'Three'];
+        this.options = ['0388.HK', 'FB', 'AAPL', 'BTC-USD', "AMZN", "TSLA", "GOOGS"];
     }
     StockCodeInputComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -332,7 +332,7 @@ var StockCodeInputComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-grid-list cols=\"4\" rowHeight=\"125px\" xmlns=\"http://www.w3.org/1999/html\">\n  <mat-grid-tile [colspan]=4 [rowspan]=2>\n    <mat-card style=\"width: 90%\">\n      <mat-grid-list cols=20 rows=1 rowHeight=\"55px\">\n        <mat-grid-tile [colspan]=19 [rowspan]=1>\n          <app-stock-code-input #stockCodeInput style=\"width: 100%\"></app-stock-code-input>\n        </mat-grid-tile>\n        <mat-grid-tile [colspan]=1 [rowspan]=1>\n          <button mat-raised-button color=\"primary\"\n                  (click)=\"stockSearchClicked($event, stockCodeInput, appStockPriceTable, refreshSlider)\"><i class=\"material-icons\">search</i>\n          </button>\n        </mat-grid-tile>\n        <mat-grid-tile [colspan]=15 [rowspan]=1>\n\n        </mat-grid-tile>\n        <mat-grid-tile [colspan]=5 [rowspan]=1>\n          <div style=\"position: absolute;right: 0px;bottom: 0px;height: 60%;\">\n            Refresh Interval\n            <app-refresh-silder #refreshSlider></app-refresh-silder>\n          </div>\n        </mat-grid-tile>\n      </mat-grid-list>\n    </mat-card>\n  </mat-grid-tile>\n\n</mat-grid-list>\n\n<mat-grid-list cols=\"4\" rowHeight=\"800px\">\n  <mat-grid-tile [colspan]=4 [rowspan]=1>\n    <mat-card style=\"width: 90%;height: 90%\">\n      <app-stock-price-table [intervalTime]=refreshSlider.value #appStockPriceTable></app-stock-price-table>\n    </mat-card>\n  </mat-grid-tile>\n</mat-grid-list>\n"
+module.exports = "<mat-grid-list cols=\"4\" rowHeight=\"145px\" xmlns=\"http://www.w3.org/1999/html\">\n  <mat-grid-tile [colspan]=4 [rowspan]=2>\n    <mat-card style=\"width: 90%\">\n      <mat-grid-list cols=20 rows=1 rowHeight=\"65px\">\n        <mat-grid-tile [colspan]=19 [rowspan]=1>\n          <app-stock-code-input #stockCodeInput style=\"width: 100%\"></app-stock-code-input>\n        </mat-grid-tile>\n        <mat-grid-tile [colspan]=1 [rowspan]=1>\n          <button mat-raised-button color=\"primary\"\n                  (click)=\"stockSearchClicked($event, stockCodeInput, appStockPriceTable, refreshSlider)\"><i class=\"material-icons\">search</i>\n          </button>\n        </mat-grid-tile>\n        <mat-grid-tile [colspan]=15 [rowspan]=1>\n\n        </mat-grid-tile>\n        <mat-grid-tile [colspan]=5 [rowspan]=1>\n          <div style=\"position: absolute;right: 0px;bottom: 0px;height: 60%;\">\n            Refresh Interval\n            <app-refresh-silder #refreshSlider></app-refresh-silder>\n          </div>\n        </mat-grid-tile>\n      </mat-grid-list>\n    </mat-card>\n  </mat-grid-tile>\n\n</mat-grid-list>\n\n<mat-grid-list cols=\"4\" rowHeight=\"800px\">\n  <mat-grid-tile [colspan]=4 [rowspan]=1>\n    <mat-card style=\"width: 90%;height: 90%\">\n      <app-stock-price-table [intervalTime]=refreshSlider.value #appStockPriceTable></app-stock-price-table>\n    </mat-card>\n  </mat-grid-tile>\n</mat-grid-list>\n"
 
 /***/ }),
 
