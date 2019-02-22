@@ -1,0 +1,34 @@
+<mat-grid-list cols="4" rowHeight="145px" xmlns="http://www.w3.org/1999/html">
+  <mat-grid-tile [colspan]=4 [rowspan]=2>
+    <mat-card style="width: 90%">
+      <mat-grid-list cols=20 rows=1 rowHeight="65px">
+        <mat-grid-tile [colspan]=19 [rowspan]=1>
+          <app-stock-code-input #stockCodeInput style="width: 100%"></app-stock-code-input>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]=1 [rowspan]=1>
+          <button mat-raised-button color="primary"
+                  (click)="stockSearchClicked($event, stockCodeInput, appStockPriceTable, refreshSlider)"><i class="material-icons">search</i>
+          </button>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]=15 [rowspan]=1>
+
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]=5 [rowspan]=1>
+          <div style="position: absolute;right: 0px;bottom: 0px;height: 60%;">
+            Refresh Interval
+            <app-refresh-silder #refreshSlider></app-refresh-silder>
+          </div>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </mat-card>
+  </mat-grid-tile>
+
+</mat-grid-list>
+
+<mat-grid-list cols="4" rowHeight="800px">
+  <mat-grid-tile [colspan]=4 [rowspan]=1>
+    <mat-card style="width: 90%;height: 90%">
+      <app-stock-price-table [intervalTime]=refreshSlider.value #appStockPriceTable></app-stock-price-table>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>
