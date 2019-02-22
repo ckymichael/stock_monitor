@@ -43,26 +43,6 @@ export class StockPriceTableComponent implements OnChanges {
     this.intervalObs = interval(this.intervalTime * 1000).subscribe(value =>
         console.log(`Refreshing time${this.intervalTime * 1000}`)
       , error1 => console.error(error1));
-    // setInterval(() => {
-    //   console.log(`Refreshing time${this.intervalTime}`);
-    //   // this.stockToMonitor.forEach(stockCode =>
-    //   //   this.stockPriceService.getStockPrice(stockCode).subscribe(
-    //   //   stockPriceInfo => {
-    //   //     this.addOrUpdateToTheTable(stockPriceInfo);
-    //   //   }, error1 => {
-    //   //     console.error(error1);
-    //   //   }
-    //   // ))
-    // }, this.intervalTime);
-  }
-
-  public setInterval1(time: number) {
-    console.log("Change");
-    this.intervalTime = time;
-  }
-
-  public showInterval() {
-    console.log(this.intervalTime);
   }
 
   addOrUpdateToTheTable(stockPriceInfo: StockPriceInfo) {
@@ -72,7 +52,6 @@ export class StockPriceTableComponent implements OnChanges {
       let stockToUpdate = rowNode.data;
       StockPriceTableComponent.setUpdatedStockInfo(stockToUpdate, stockPriceInfo);
 
-      // stockToUpdate.close = stockToUpdate.close - 1;
       this.gridApi.updateRowData({update: [stockToUpdate]});
     } else {
       console.log("Add");
@@ -103,8 +82,6 @@ export class StockPriceTableComponent implements OnChanges {
   }
 
   private static setUpdatedStockInfo(stockToUpdate: StockPriceInfo, data: StockPriceInfo) {
-    // console.log(stockToUpdate);
-    // console.log(data);
     stockToUpdate.changed = data.close - stockToUpdate.close;
     stockToUpdate.close = data.close;
     stockToUpdate.high = data.high;
@@ -128,12 +105,6 @@ export class StockPriceTableComponent implements OnChanges {
       });
     }
   }
-
-
-  // this.doSomething(changes.categoryId.currentValue);
-  // You can also use categoryId.previousValue and
-  // categoryId.firstChange for comparing old and new values
-
 }
 
 function numberToColor(param) {
@@ -141,7 +112,7 @@ function numberToColor(param) {
   if (param.data.changed == 0 || param.data.changed == null) {
     return "#f4fffd";
   } else if (param.data.changed > 0) {
-    return "#10ff1f";
+    return "#17af1c";
   } else {
     return "#ff513e";
   }
