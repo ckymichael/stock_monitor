@@ -1,0 +1,8 @@
+<mat-slider
+  class="mat-refresh-slider"
+  thumbLabel
+  tickInterval="1"
+  [value]=value
+  [(ngModel)]="value"
+  min="0"
+  max="60"></mat-slider>

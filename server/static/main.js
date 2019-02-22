@@ -67,7 +67,7 @@ var AppRoutingModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<router-outlet></router-outlet>\n"
+module.exports = "<router-outlet></router-outlet>\r\n"
 
 /***/ }),
 
@@ -206,7 +206,7 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-slider\n  class=\"mat-refresh-slider\"\n  thumbLabel\n  tickInterval=\"1\"\n  [value]=value\n  [(ngModel)]=\"value\"\n  min=\"0\"\n  max=\"60\"></mat-slider>\n"
+module.exports = "<mat-slider\r\n  class=\"mat-refresh-slider\"\r\n  thumbLabel\r\n  tickInterval=\"1\"\r\n  [value]=value\r\n  [(ngModel)]=\"value\"\r\n  min=\"0\"\r\n  max=\"60\"></mat-slider>\r\n"
 
 /***/ }),
 
@@ -260,7 +260,7 @@ var RefreshSilderComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<form class=\"input-form\">\n  <mat-form-field class=\"input-form-full-width\">\n    <input style=\"width: 100%\" type=\"text\" placeholder=\"Input Stock Code\" aria-label=\"Number\" matInput [formControl]=\"myControl\" [matAutocomplete]=\"auto\">\n    <mat-autocomplete #auto=\"matAutocomplete\">\n      <mat-option *ngFor=\"let option of filteredOptions | async\" [value]=\"option\">\n        {{option}}\n      </mat-option>\n    </mat-autocomplete>\n  </mat-form-field>\n</form>\n"
+module.exports = "<form class=\"input-form\">\r\n  <mat-form-field class=\"input-form-full-width\">\r\n    <input style=\"width: 100%\" type=\"text\" placeholder=\"Input Stock Code\" aria-label=\"Number\" matInput [formControl]=\"myControl\" [matAutocomplete]=\"auto\">\r\n    <mat-autocomplete #auto=\"matAutocomplete\">\r\n      <mat-option *ngFor=\"let option of filteredOptions | async\" [value]=\"option\">\r\n        {{option}}\r\n      </mat-option>\r\n    </mat-autocomplete>\r\n  </mat-form-field>\r\n</form>\r\n"
 
 /***/ }),
 
@@ -332,7 +332,7 @@ var StockCodeInputComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-grid-list cols=\"4\" rowHeight=\"145px\" xmlns=\"http://www.w3.org/1999/html\">\n  <mat-grid-tile [colspan]=4 [rowspan]=2>\n    <mat-card style=\"width: 90%\">\n      <mat-grid-list cols=20 rows=1 rowHeight=\"65px\">\n        <mat-grid-tile [colspan]=19 [rowspan]=1>\n          <app-stock-code-input #stockCodeInput style=\"width: 100%\"></app-stock-code-input>\n        </mat-grid-tile>\n        <mat-grid-tile [colspan]=1 [rowspan]=1>\n          <button mat-raised-button color=\"primary\"\n                  (click)=\"stockSearchClicked($event, stockCodeInput, appStockPriceTable, refreshSlider)\"><i class=\"material-icons\">search</i>\n          </button>\n        </mat-grid-tile>\n        <mat-grid-tile [colspan]=15 [rowspan]=1>\n\n        </mat-grid-tile>\n        <mat-grid-tile [colspan]=5 [rowspan]=1>\n          <div style=\"position: absolute;right: 0px;bottom: 0px;height: 60%;\">\n            Refresh Interval\n            <app-refresh-silder #refreshSlider></app-refresh-silder>\n          </div>\n        </mat-grid-tile>\n      </mat-grid-list>\n    </mat-card>\n  </mat-grid-tile>\n\n</mat-grid-list>\n\n<mat-grid-list cols=\"4\" rowHeight=\"800px\">\n  <mat-grid-tile [colspan]=4 [rowspan]=1>\n    <mat-card style=\"width: 90%;height: 90%\">\n      <app-stock-price-table [intervalTime]=refreshSlider.value #appStockPriceTable></app-stock-price-table>\n    </mat-card>\n  </mat-grid-tile>\n</mat-grid-list>\n"
+module.exports = "<mat-grid-list cols=\"4\" rowHeight=\"85px\" xmlns=\"http://www.w3.org/1999/html\">\r\n  <mat-grid-tile [colspan]=4 [rowspan]=2>\r\n    <mat-card style=\"width: 90%\">\r\n      <mat-grid-list cols=20 rows=1 rowHeight=\"65px\">\r\n        <mat-grid-tile [colspan]=19 [rowspan]=1>\r\n          <app-stock-code-input #stockCodeInput style=\"width: 100%\"></app-stock-code-input>\r\n        </mat-grid-tile>\r\n        <mat-grid-tile [colspan]=1 [rowspan]=1>\r\n          <button mat-raised-button color=\"primary\"\r\n                  (click)=\"stockSearchClicked($event, stockCodeInput, appStockPriceTable, refreshSlider)\"><i class=\"material-icons\">search</i>\r\n          </button>\r\n        </mat-grid-tile>\r\n        <mat-grid-tile [colspan]=15 [rowspan]=1>\r\n\r\n        </mat-grid-tile>\r\n        <mat-grid-tile [colspan]=5 [rowspan]=1>\r\n          <div style=\"position: absolute;right: 0px;bottom: 0px;height: 60%;\">\r\n            Refresh Interval\r\n            <app-refresh-silder #refreshSlider></app-refresh-silder>\r\n          </div>\r\n        </mat-grid-tile>\r\n      </mat-grid-list>\r\n    </mat-card>\r\n  </mat-grid-tile>\r\n\r\n</mat-grid-list>\r\n\r\n<mat-grid-list cols=\"4\" rowHeight=\"800px\">\r\n  <mat-grid-tile [colspan]=4 [rowspan]=1>\r\n    <mat-card style=\"width: 90%;height: 90%\">\r\n      <app-stock-price-table [intervalTime]=refreshSlider.value #appStockPriceTable></app-stock-price-table>\r\n    </mat-card>\r\n  </mat-grid-tile>\r\n</mat-grid-list>\r\n"
 
 /***/ }),
 
@@ -343,7 +343,7 @@ module.exports = "<mat-grid-list cols=\"4\" rowHeight=\"145px\" xmlns=\"http://w
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".grid-container {\n  margin: 20px; }\n\n.dashboard-card {\n  position: absolute;\n  top: 15px;\n  left: 15px;\n  right: 15px;\n  bottom: 15px; }\n\n.more-button {\n  position: absolute;\n  top: 5px;\n  right: 10px; }\n\n.dashboard-card-content {\n  text-align: center; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvc3RvY2stbW9uaXRvci1kYXNoYm9hcmQvQzpcXFVzZXJzXFxNYXJjb1xcV29ya3NwYWNlc1xcc3RvY2tNb25pdG9yXFxjbGllbnQvc3JjXFxhcHBcXHN0b2NrLW1vbml0b3ItZGFzaGJvYXJkXFxzdG9jay1tb25pdG9yLWRhc2hib2FyZC5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGFBQVksRUFDYjs7QUFFRDtFQUNFLG1CQUFrQjtFQUNsQixVQUFTO0VBQ1QsV0FBVTtFQUNWLFlBQVc7RUFDWCxhQUFZLEVBQ2I7O0FBRUQ7RUFDRSxtQkFBa0I7RUFDbEIsU0FBUTtFQUNSLFlBQVcsRUFDWjs7QUFFRDtFQUNFLG1CQUFrQixFQUNuQiIsImZpbGUiOiJzcmMvYXBwL3N0b2NrLW1vbml0b3ItZGFzaGJvYXJkL3N0b2NrLW1vbml0b3ItZGFzaGJvYXJkLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmdyaWQtY29udGFpbmVyIHtcbiAgbWFyZ2luOiAyMHB4O1xufVxuXG4uZGFzaGJvYXJkLWNhcmQge1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIHRvcDogMTVweDtcbiAgbGVmdDogMTVweDtcbiAgcmlnaHQ6IDE1cHg7XG4gIGJvdHRvbTogMTVweDtcbn1cblxuLm1vcmUtYnV0dG9uIHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICB0b3A6IDVweDtcbiAgcmlnaHQ6IDEwcHg7XG59XG5cbi5kYXNoYm9hcmQtY2FyZC1jb250ZW50IHtcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xufVxuIl19 */"
+module.exports = ".grid-container {\n  margin: 20px; }\n\n.dashboard-card {\n  position: absolute;\n  top: 15px;\n  left: 15px;\n  right: 15px;\n  bottom: 15px; }\n\n.more-button {\n  position: absolute;\n  top: 5px;\n  right: 10px; }\n\n.dashboard-card-content {\n  text-align: center; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvc3RvY2stbW9uaXRvci1kYXNoYm9hcmQvQzpcXFVzZXJzXFxNYXJjb1xcV29ya3NwYWNlc1xcc3RvY2tNb25pdG9yXFxjbGllbnQvc3JjXFxhcHBcXHN0b2NrLW1vbml0b3ItZGFzaGJvYXJkXFxzdG9jay1tb25pdG9yLWRhc2hib2FyZC5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGFBQVksRUFDYjs7QUFFRDtFQUNFLG1CQUFrQjtFQUNsQixVQUFTO0VBQ1QsV0FBVTtFQUNWLFlBQVc7RUFDWCxhQUFZLEVBQ2I7O0FBRUQ7RUFDRSxtQkFBa0I7RUFDbEIsU0FBUTtFQUNSLFlBQVcsRUFDWjs7QUFFRDtFQUNFLG1CQUFrQixFQUNuQiIsImZpbGUiOiJzcmMvYXBwL3N0b2NrLW1vbml0b3ItZGFzaGJvYXJkL3N0b2NrLW1vbml0b3ItZGFzaGJvYXJkLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmdyaWQtY29udGFpbmVyIHtcclxuICBtYXJnaW46IDIwcHg7XHJcbn1cclxuXHJcbi5kYXNoYm9hcmQtY2FyZCB7XHJcbiAgcG9zaXRpb246IGFic29sdXRlO1xyXG4gIHRvcDogMTVweDtcclxuICBsZWZ0OiAxNXB4O1xyXG4gIHJpZ2h0OiAxNXB4O1xyXG4gIGJvdHRvbTogMTVweDtcclxufVxyXG5cclxuLm1vcmUtYnV0dG9uIHtcclxuICBwb3NpdGlvbjogYWJzb2x1dGU7XHJcbiAgdG9wOiA1cHg7XHJcbiAgcmlnaHQ6IDEwcHg7XHJcbn1cclxuXHJcbi5kYXNoYm9hcmQtY2FyZC1jb250ZW50IHtcclxuICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbn1cclxuIl19 */"
 
 /***/ }),
 
@@ -425,7 +425,7 @@ var StockPriceService = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ag-grid-angular\n  #agGrid\n  style=\"width: 100%; height: 100%;\"\n  id=\"myGrid\"\n  class=\"ag-theme-balham\"\n  [columnDefs]=\"columnDefs\"\n  [rowData]=\"rowData\"\n  [animateRows]=\"true\"\n  [rowSelection]=\"rowSelection\"\n  [enableCellChangeFlash]=\"true\"\n  [enableSorting]=\"true\"\n  (gridReady)=\"onGridReady($event)\"\n></ag-grid-angular>\n<button (click)=\"showInterval()\"></button>\n"
+module.exports = "<ag-grid-angular\r\n  #agGrid\r\n  style=\"width: 100%; height: 100%;\"\r\n  id=\"myGrid\"\r\n  class=\"ag-theme-balham\"\r\n  [columnDefs]=\"columnDefs\"\r\n  [rowData]=\"rowData\"\r\n  [animateRows]=\"true\"\r\n  [rowSelection]=\"rowSelection\"\r\n  [enableCellChangeFlash]=\"true\"\r\n  [enableSorting]=\"true\"\r\n  (gridReady)=\"onGridReady($event)\"\r\n></ag-grid-angular>\r\n"
 
 /***/ }),
 
@@ -483,33 +483,14 @@ var StockPriceTableComponent = /** @class */ (function () {
         this.intervalObs = Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["interval"])(this.intervalTime * 1000).subscribe(function (value) {
             return console.log("Refreshing time" + _this.intervalTime * 1000);
         }, function (error1) { return console.error(error1); });
-        // setInterval(() => {
-        //   console.log(`Refreshing time${this.intervalTime}`);
-        //   // this.stockToMonitor.forEach(stockCode =>
-        //   //   this.stockPriceService.getStockPrice(stockCode).subscribe(
-        //   //   stockPriceInfo => {
-        //   //     this.addOrUpdateToTheTable(stockPriceInfo);
-        //   //   }, error1 => {
-        //   //     console.error(error1);
-        //   //   }
-        //   // ))
-        // }, this.intervalTime);
     }
     StockPriceTableComponent_1 = StockPriceTableComponent;
-    StockPriceTableComponent.prototype.setInterval1 = function (time) {
-        console.log("Change");
-        this.intervalTime = time;
-    };
-    StockPriceTableComponent.prototype.showInterval = function () {
-        console.log(this.intervalTime);
-    };
     StockPriceTableComponent.prototype.addOrUpdateToTheTable = function (stockPriceInfo) {
         var rowNode = this.getIfExisted(stockPriceInfo);
         if (rowNode != null) {
             console.log("Update");
             var stockToUpdate = rowNode.data;
             StockPriceTableComponent_1.setUpdatedStockInfo(stockToUpdate, stockPriceInfo);
-            // stockToUpdate.close = stockToUpdate.close - 1;
             this.gridApi.updateRowData({ update: [stockToUpdate] });
         }
         else {
@@ -537,8 +518,6 @@ var StockPriceTableComponent = /** @class */ (function () {
         this.gridColumnApi = params.columnApi;
     };
     StockPriceTableComponent.setUpdatedStockInfo = function (stockToUpdate, data) {
-        // console.log(stockToUpdate);
-        // console.log(data);
         stockToUpdate.changed = data.close - stockToUpdate.close;
         stockToUpdate.close = data.close;
         stockToUpdate.high = data.high;
@@ -580,7 +559,7 @@ function numberToColor(param) {
         return "#f4fffd";
     }
     else if (param.data.changed > 0) {
-        return "#10ff1f";
+        return "#17af1c";
     }
     else {
         return "#ff513e";

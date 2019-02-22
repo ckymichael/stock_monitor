@@ -1,0 +1,11 @@
+{
+  "http://localhost:4200/*": {
+    "target": "http://localhost:5000/",
+    "secure": false
+  },
+    "/YahooStockPrice/yahoo-stock-price": {
+    "target": "http://localhost:5000/",
+    "secure": false
+  }
+
+}
