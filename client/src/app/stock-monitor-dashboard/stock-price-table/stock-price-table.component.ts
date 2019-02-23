@@ -1,6 +1,6 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {StockPriceService} from "./service/stock-price.service";
-import {StockPriceInfo} from "./model/stock-price-info";
+import {StockInfo} from "./model/stock-info";
 import {RowNode} from "ag-grid-community";
 import {interval} from 'rxjs';
 import {Observable} from "rxjs/internal/Observable";
@@ -18,25 +18,32 @@ export class StockPriceTableComponent implements OnChanges {
   private columnDefs;
   private rowData;
   private rowSelection;
-  private stockToMonitor: string[] = [];
+  private stockToMonitor: string[] = ["IBM", "BTC-USD", "AAPL", "0388.HK", "XRP-USD", "JPM", "UBS"];
   private intervalObs;
   @Input() intervalTime: number;
 
   constructor(private stockPriceService: StockPriceService) {
     this.intervalTime = 4000;
+
     this.columnDefs = [
       {headerName: "Stock Code", field: "stock_code"},
-      {headerName: "Open", field: "open"},
-      {headerName: "High", field: "high"},
-      {headerName: "Low", field: "low"},
+      {headerName: "Market state", field: "marketState"},
+      {headerName: "Market cap", field: "marketCap"},
+      {headerName: "Region", field: "region"},
+      {headerName: "Quote type", field: "quoteType"},
+      {headerName: "Currency", field: "currency"},
+      {headerName: "Open", field: "regularMarketOpen"},
+      {headerName: "High", field: "regularMarketDayHigh"},
+      {headerName: "Low", field: "regularMarketDayLow"},
+      {headerName: "200 day avg", field: "twoHundredDayAverage"},
       {
-        headerName: "Close", field: "close", cellStyle: function (params) {
+        headerName: "Price", field: "price", cellStyle: function (params) {
           var color = numberToColor(params);
           return {"background-color": color};
         }
       },
-      {headerName: "Changed", field: "changed"},
-      {headerName: "Volume", field: "volume"},
+      {headerName: "Last changed", field: "changed"},
+      {headerName: "Volume", field: "regularMarketVolume"},
     ];
     this.rowData = [];
     this.rowSelection = "multiple";
@@ -45,21 +52,21 @@ export class StockPriceTableComponent implements OnChanges {
       , error1 => console.error(error1));
   }
 
-  addOrUpdateToTheTable(stockPriceInfo: StockPriceInfo) {
-    let rowNode = this.getIfExisted(stockPriceInfo);
+  addOrUpdateToTheTable(stockInfo: StockInfo) {
+    let rowNode = this.getIfExisted(stockInfo);
     if (rowNode != null) {
-      console.log("Update");
       let stockToUpdate = rowNode.data;
-      StockPriceTableComponent.setUpdatedStockInfo(stockToUpdate, stockPriceInfo);
+      StockPriceTableComponent.setUpdatedStockInfo(stockToUpdate, stockInfo);
 
       this.gridApi.updateRowData({update: [stockToUpdate]});
     } else {
-      console.log("Add");
-      this.gridApi.updateRowData({add: [stockPriceInfo]});
+      this.gridApi.showLoadingOverlay();
+      this.gridApi.sizeColumnsToFit();
+      this.gridApi.updateRowData({add: [stockInfo]});
     }
   }
 
-  getIfExisted(stockPriceInfo: StockPriceInfo): RowNode {
+  getIfExisted(stockPriceInfo: StockInfo): RowNode {
     let tempRowNode = null;
     this.gridApi.forEachNode(function (rowNode: RowNode, _) {
       if (rowNode.data.stock_code == stockPriceInfo.stock_code) {
@@ -70,8 +77,8 @@ export class StockPriceTableComponent implements OnChanges {
   }
 
   addStockToMonitor(stockCode: string) {
-    console.log(`Trying to add stock code ${stockCode}`);
     if (!this.stockToMonitor.includes(stockCode)) {
+      this.gridApi.showLoadingOverlay();
       this.stockToMonitor.push(stockCode)
     }
   }
@@ -79,16 +86,22 @@ export class StockPriceTableComponent implements OnChanges {
   onGridReady(params) {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
+    this.gridApi.sizeColumnsToFit();
+    this.gridApi.showLoadingOverlay();
   }
 
-  private static setUpdatedStockInfo(stockToUpdate: StockPriceInfo, data: StockPriceInfo) {
-    stockToUpdate.changed = data.close - stockToUpdate.close;
-    stockToUpdate.close = data.close;
-    stockToUpdate.high = data.high;
-    stockToUpdate.low = data.low;
-    stockToUpdate.open = data.open;
-    stockToUpdate.volume = data.volume;
-
+  private static setUpdatedStockInfo(stockToUpdate: StockInfo, data: StockInfo) {
+    stockToUpdate.changed = data.price - stockToUpdate.price;
+    stockToUpdate.price = data.price;
+    stockToUpdate.marketState = data.marketState;
+    stockToUpdate.marketCap = data.marketCap;
+    stockToUpdate.region = data.region;
+    stockToUpdate.quoteType = data.quoteType;
+    stockToUpdate.currency = data.currency;
+    stockToUpdate.regularMarketOpen = data.regularMarketOpen;
+    stockToUpdate.regularMarketDayHigh = data.regularMarketDayHigh;
+    stockToUpdate.regularMarketDayLow = data.regularMarketDayLow;
+    stockToUpdate.twoHundredDayAverage = data.twoHundredDayAverage;
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -96,7 +109,6 @@ export class StockPriceTableComponent implements OnChanges {
       this.intervalTime = changes.intervalTime.currentValue;
       this.intervalObs.unsubscribe();
       this.intervalObs = interval(this.intervalTime * 1000).subscribe(() => {
-        console.log(`refreshing time : ${this.intervalTime}`);
         this.stockToMonitor.forEach(stockCode => this.stockPriceService.getStockPrice(stockCode).subscribe(
           stockPriceInfo => this.addOrUpdateToTheTable(stockPriceInfo)
           , error1 => console.error(error1)
@@ -108,7 +120,6 @@ export class StockPriceTableComponent implements OnChanges {
 }
 
 function numberToColor(param) {
-  console.log(param);
   if (param.data.changed == 0 || param.data.changed == null) {
     return "#f4fffd";
   } else if (param.data.changed > 0) {

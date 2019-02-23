@@ -253,6 +253,26 @@ var RefreshSilderComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/stock-monitor-dashboard/stock-code-input/model/yahoo-query-result.ts":
+/*!**************************************************************************************!*\
+  !*** ./src/app/stock-monitor-dashboard/stock-code-input/model/yahoo-query-result.ts ***!
+  \**************************************************************************************/
+/*! exports provided: Quote */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Quote", function() { return Quote; });
+var Quote = /** @class */ (function () {
+    function Quote() {
+    }
+    return Quote;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/stock-monitor-dashboard/stock-code-input/stock-code-input.component.html":
 /*!******************************************************************************************!*\
   !*** ./src/app/stock-monitor-dashboard/stock-code-input/stock-code-input.component.html ***!
@@ -260,7 +280,7 @@ var RefreshSilderComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<form class=\"input-form\">\r\n  <mat-form-field class=\"input-form-full-width\">\r\n    <input style=\"width: 100%\" type=\"text\" placeholder=\"Input Stock Code\" aria-label=\"Number\" matInput [formControl]=\"myControl\" [matAutocomplete]=\"auto\">\r\n    <mat-autocomplete #auto=\"matAutocomplete\">\r\n      <mat-option *ngFor=\"let option of filteredOptions | async\" [value]=\"option\">\r\n        {{option}}\r\n      </mat-option>\r\n    </mat-autocomplete>\r\n  </mat-form-field>\r\n</form>\r\n"
+module.exports = "<form class=\"input-form\">\r\n  <mat-form-field class=\"input-form-full-width\">\r\n    <input style=\"width: 100%\" type=\"text\" placeholder=\"Input Stock Code\" aria-label=\"Number\" matInput\r\n           [formControl]=\"myControl\" [matAutocomplete]=\"auto\">\r\n    <mat-autocomplete #auto=\"matAutocomplete\">\r\n      <mat-option *ngFor=\"let option of filteredOptions | async\" [value]=\"option.symbol\">\r\n        {{option.symbol}} - {{ option.shortname }}\r\n      </mat-option>\r\n    </mat-autocomplete>\r\n  </mat-form-field>\r\n</form>\r\n"
 
 /***/ }),
 
@@ -289,23 +309,57 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _model_yahoo_query_result__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./model/yahoo-query-result */ "./src/app/stock-monitor-dashboard/stock-code-input/model/yahoo-query-result.ts");
+
+
 
 
 
 
 var StockCodeInputComponent = /** @class */ (function () {
-    function StockCodeInputComponent() {
+    function StockCodeInputComponent(httpClient) {
+        this.httpClient = httpClient;
         this.myControl = new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"]();
-        this.options = ['0388.HK', 'FB', 'AAPL', 'BTC-USD', "AMZN", "TSLA", "GOOGS"];
+        this.options = [this.createDefaultQuoteTemp("IBM", "International Business Machines"), this.createDefaultQuoteTemp("BTC-USD", "Bitcoin USD")];
+        this.NOT_ACCEPTED_QUOTE_TYPE = "OPTION";
+        this.ACCEPTED_INDEX = "quotes";
     }
     StockCodeInputComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.filteredOptions = this.myControl.valueChanges
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["startWith"])(''), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (value) { return _this._filter(value); }));
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["debounceTime"])(500), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["tap"])(function (x) { return _this.searchFromYahooQuery(x).subscribe(function (value) {
+            _this.options = [];
+            value.quotes.filter(function (quote) { return quote.isYahooFinance == true; })
+                .filter(function (quote) { return !quote.quoteType.includes(_this.NOT_ACCEPTED_QUOTE_TYPE) && quote.index == _this.ACCEPTED_INDEX; })
+                .forEach(function (quote) {
+                _this.options.push(quote);
+            });
+            // console.log("Done");
+        }); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["debounceTime"])(1500), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (value) {
+            var filteredOption = _this._filter(value);
+            console.log(filteredOption);
+            if (filteredOption.length == 0) {
+                return [_this.createDefaultQuoteTemp("", "No such quote " + value)];
+            }
+            else {
+                return filteredOption;
+            }
+        }));
     };
     StockCodeInputComponent.prototype._filter = function (value) {
         var filterValue = value.toLowerCase();
-        return this.options.filter(function (option) { return option.toLowerCase().includes(filterValue); });
+        return this.options.filter(function (option) { return option.symbol.toLowerCase().includes(filterValue); });
+    };
+    StockCodeInputComponent.prototype.searchFromYahooQuery = function (input) {
+        console.log("searching");
+        return this.httpClient.get("YahooStockPrice/yahoo-stock-code?stockCode=" + input);
+    };
+    StockCodeInputComponent.prototype.createDefaultQuoteTemp = function (symbol, name) {
+        var quote = new _model_yahoo_query_result__WEBPACK_IMPORTED_MODULE_5__["Quote"]();
+        quote.symbol = symbol;
+        quote.shortname = name;
+        return quote;
     };
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"])("InputValue"),
@@ -316,7 +370,8 @@ var StockCodeInputComponent = /** @class */ (function () {
             selector: 'app-stock-code-input',
             template: __webpack_require__(/*! ./stock-code-input.component.html */ "./src/app/stock-monitor-dashboard/stock-code-input/stock-code-input.component.html"),
             styles: [__webpack_require__(/*! ./stock-code-input.component.scss */ "./src/app/stock-monitor-dashboard/stock-code-input/stock-code-input.component.scss")]
-        })
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClient"]])
     ], StockCodeInputComponent);
     return StockCodeInputComponent;
 }());
@@ -332,7 +387,7 @@ var StockCodeInputComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-grid-list cols=\"4\" rowHeight=\"85px\" xmlns=\"http://www.w3.org/1999/html\">\r\n  <mat-grid-tile [colspan]=4 [rowspan]=2>\r\n    <mat-card style=\"width: 90%\">\r\n      <mat-grid-list cols=20 rows=1 rowHeight=\"65px\">\r\n        <mat-grid-tile [colspan]=19 [rowspan]=1>\r\n          <app-stock-code-input #stockCodeInput style=\"width: 100%\"></app-stock-code-input>\r\n        </mat-grid-tile>\r\n        <mat-grid-tile [colspan]=1 [rowspan]=1>\r\n          <button mat-raised-button color=\"primary\"\r\n                  (click)=\"stockSearchClicked($event, stockCodeInput, appStockPriceTable, refreshSlider)\"><i class=\"material-icons\">search</i>\r\n          </button>\r\n        </mat-grid-tile>\r\n        <mat-grid-tile [colspan]=15 [rowspan]=1>\r\n\r\n        </mat-grid-tile>\r\n        <mat-grid-tile [colspan]=5 [rowspan]=1>\r\n          <div style=\"position: absolute;right: 0px;bottom: 0px;height: 60%;\">\r\n            Refresh Interval\r\n            <app-refresh-silder #refreshSlider></app-refresh-silder>\r\n          </div>\r\n        </mat-grid-tile>\r\n      </mat-grid-list>\r\n    </mat-card>\r\n  </mat-grid-tile>\r\n\r\n</mat-grid-list>\r\n\r\n<mat-grid-list cols=\"4\" rowHeight=\"800px\">\r\n  <mat-grid-tile [colspan]=4 [rowspan]=1>\r\n    <mat-card style=\"width: 90%;height: 90%\">\r\n      <app-stock-price-table [intervalTime]=refreshSlider.value #appStockPriceTable></app-stock-price-table>\r\n    </mat-card>\r\n  </mat-grid-tile>\r\n</mat-grid-list>\r\n"
+module.exports = "<mat-grid-list cols=\"4\" rowHeight=\"85px\" xmlns=\"http://www.w3.org/1999/html\">\r\n  <mat-grid-tile [colspan]=4 [rowspan]=2>\r\n    <mat-card style=\"width: 90%\">\r\n      <mat-grid-list cols=20 rows=1 rowHeight=\"65px\">\r\n        <mat-grid-tile [colspan]=19 [rowspan]=1>\r\n          <app-stock-code-input #stockCodeInput style=\"width: 100%\"></app-stock-code-input>\r\n        </mat-grid-tile>\r\n        <mat-grid-tile [colspan]=1 [rowspan]=1>\r\n          <button mat-raised-button color=\"primary\"\r\n                  (click)=\"stockSearchClicked($event, stockCodeInput, appStockPriceTable, refreshSlider)\"><i class=\"material-icons\">search</i>\r\n          </button>\r\n        </mat-grid-tile>\r\n        <mat-grid-tile [colspan]=14 [rowspan]=1>\r\n\r\n        </mat-grid-tile>\r\n        <mat-grid-tile [colspan]=6 [rowspan]=1>\r\n          <div style=\"position: absolute;right: 10px;bottom: 0px;height: 60%;width: fit-content\">\r\n            Auto refresh in {{ refreshSlider.value}}s\r\n            <app-refresh-silder #refreshSlider></app-refresh-silder>\r\n          </div>\r\n        </mat-grid-tile>\r\n      </mat-grid-list>\r\n    </mat-card>\r\n  </mat-grid-tile>\r\n\r\n</mat-grid-list>\r\n\r\n<mat-grid-list cols=\"4\" rowHeight=\"800px\">\r\n  <mat-grid-tile [colspan]=4 [rowspan]=1>\r\n    <mat-card style=\"width: 90%;height: 90%\">\r\n      <app-stock-price-table [intervalTime]=refreshSlider.value #appStockPriceTable></app-stock-price-table>\r\n    </mat-card>\r\n  </mat-grid-tile>\r\n</mat-grid-list>\r\n"
 
 /***/ }),
 
@@ -366,7 +421,6 @@ var StockMonitorDashboardComponent = /** @class */ (function () {
     }
     StockMonitorDashboardComponent.prototype.stockSearchClicked = function ($event, stockCodeInput, appStockPriceTable, refreshSlider) {
         appStockPriceTable.addStockToMonitor(stockCodeInput.myControl.value);
-        console.log(refreshSlider);
     };
     StockMonitorDashboardComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -462,21 +516,27 @@ var StockPriceTableComponent = /** @class */ (function () {
     function StockPriceTableComponent(stockPriceService) {
         var _this = this;
         this.stockPriceService = stockPriceService;
-        this.stockToMonitor = [];
+        this.stockToMonitor = ["IBM", "BTC-USD", "AAPL", "0388.HK", "XRP-USD", "JPM", "UBS"];
         this.intervalTime = 4000;
         this.columnDefs = [
             { headerName: "Stock Code", field: "stock_code" },
-            { headerName: "Open", field: "open" },
-            { headerName: "High", field: "high" },
-            { headerName: "Low", field: "low" },
+            { headerName: "Market state", field: "marketState" },
+            { headerName: "Market cap", field: "marketCap" },
+            { headerName: "Region", field: "region" },
+            { headerName: "Quote type", field: "quoteType" },
+            { headerName: "Currency", field: "currency" },
+            { headerName: "Open", field: "regularMarketOpen" },
+            { headerName: "High", field: "regularMarketDayHigh" },
+            { headerName: "Low", field: "regularMarketDayLow" },
+            { headerName: "200 day avg", field: "twoHundredDayAverage" },
             {
-                headerName: "Close", field: "close", cellStyle: function (params) {
+                headerName: "Price", field: "price", cellStyle: function (params) {
                     var color = numberToColor(params);
                     return { "background-color": color };
                 }
             },
-            { headerName: "Changed", field: "changed" },
-            { headerName: "Volume", field: "volume" },
+            { headerName: "Last changed", field: "changed" },
+            { headerName: "Volume", field: "regularMarketVolume" },
         ];
         this.rowData = [];
         this.rowSelection = "multiple";
@@ -485,17 +545,17 @@ var StockPriceTableComponent = /** @class */ (function () {
         }, function (error1) { return console.error(error1); });
     }
     StockPriceTableComponent_1 = StockPriceTableComponent;
-    StockPriceTableComponent.prototype.addOrUpdateToTheTable = function (stockPriceInfo) {
-        var rowNode = this.getIfExisted(stockPriceInfo);
+    StockPriceTableComponent.prototype.addOrUpdateToTheTable = function (stockInfo) {
+        var rowNode = this.getIfExisted(stockInfo);
         if (rowNode != null) {
-            console.log("Update");
             var stockToUpdate = rowNode.data;
-            StockPriceTableComponent_1.setUpdatedStockInfo(stockToUpdate, stockPriceInfo);
+            StockPriceTableComponent_1.setUpdatedStockInfo(stockToUpdate, stockInfo);
             this.gridApi.updateRowData({ update: [stockToUpdate] });
         }
         else {
-            console.log("Add");
-            this.gridApi.updateRowData({ add: [stockPriceInfo] });
+            this.gridApi.showLoadingOverlay();
+            this.gridApi.sizeColumnsToFit();
+            this.gridApi.updateRowData({ add: [stockInfo] });
         }
     };
     StockPriceTableComponent.prototype.getIfExisted = function (stockPriceInfo) {
@@ -508,22 +568,29 @@ var StockPriceTableComponent = /** @class */ (function () {
         return tempRowNode;
     };
     StockPriceTableComponent.prototype.addStockToMonitor = function (stockCode) {
-        console.log("Trying to add stock code " + stockCode);
         if (!this.stockToMonitor.includes(stockCode)) {
+            this.gridApi.showLoadingOverlay();
             this.stockToMonitor.push(stockCode);
         }
     };
     StockPriceTableComponent.prototype.onGridReady = function (params) {
         this.gridApi = params.api;
         this.gridColumnApi = params.columnApi;
+        this.gridApi.sizeColumnsToFit();
+        this.gridApi.showLoadingOverlay();
     };
     StockPriceTableComponent.setUpdatedStockInfo = function (stockToUpdate, data) {
-        stockToUpdate.changed = data.close - stockToUpdate.close;
-        stockToUpdate.close = data.close;
-        stockToUpdate.high = data.high;
-        stockToUpdate.low = data.low;
-        stockToUpdate.open = data.open;
-        stockToUpdate.volume = data.volume;
+        stockToUpdate.changed = data.price - stockToUpdate.price;
+        stockToUpdate.price = data.price;
+        stockToUpdate.marketState = data.marketState;
+        stockToUpdate.marketCap = data.marketCap;
+        stockToUpdate.region = data.region;
+        stockToUpdate.quoteType = data.quoteType;
+        stockToUpdate.currency = data.currency;
+        stockToUpdate.regularMarketOpen = data.regularMarketOpen;
+        stockToUpdate.regularMarketDayHigh = data.regularMarketDayHigh;
+        stockToUpdate.regularMarketDayLow = data.regularMarketDayLow;
+        stockToUpdate.twoHundredDayAverage = data.twoHundredDayAverage;
     };
     StockPriceTableComponent.prototype.ngOnChanges = function (changes) {
         var _this = this;
@@ -531,7 +598,6 @@ var StockPriceTableComponent = /** @class */ (function () {
             this.intervalTime = changes.intervalTime.currentValue;
             this.intervalObs.unsubscribe();
             this.intervalObs = Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["interval"])(this.intervalTime * 1000).subscribe(function () {
-                console.log("refreshing time : " + _this.intervalTime);
                 _this.stockToMonitor.forEach(function (stockCode) { return _this.stockPriceService.getStockPrice(stockCode).subscribe(function (stockPriceInfo) { return _this.addOrUpdateToTheTable(stockPriceInfo); }, function (error1) { return console.error(error1); }); });
             });
         }
@@ -554,7 +620,6 @@ var StockPriceTableComponent = /** @class */ (function () {
 }());
 
 function numberToColor(param) {
-    console.log(param);
     if (param.data.changed == 0 || param.data.changed == null) {
         return "#f4fffd";
     }

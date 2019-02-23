@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {StockPriceInfo} from "../model/stock-price-info";
+import {StockInfo} from "../model/stock-info";
 import {Observable} from "rxjs/internal/Observable";
 
 @Injectable({
@@ -11,8 +11,8 @@ export class StockPriceService {
   constructor(private httpClient: HttpClient) {
   }
 
-  public getStockPrice(stock_code: string): Observable<StockPriceInfo> {
-    return this.httpClient.get<StockPriceInfo>(`YahooStockPrice/yahoo-stock-price?stockCode=${stock_code}`)
+  public getStockPrice(stock_code: string): Observable<StockInfo> {
+    return this.httpClient.get<StockInfo>(`YahooStockPrice/yahoo-stock-price?stockCode=${stock_code}`)
   }
 
 }

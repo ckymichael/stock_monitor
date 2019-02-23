@@ -1,8 +1,8 @@
 from flask import request
 from flask_restplus import Resource, Namespace
 
-from server.infrastructure.connector.YahooStockPriceConnector import YahooStockPriceConnector
-from server.infrastructure.models.StockPriceInfo import stock_price_info_to_dict
+from server.infrastructure.connector.YahooConnector import YahooStockPriceConnector
+from server.infrastructure.models.StockInfo import stock_info_to_dict
 
 ns_yahoo_stock_price = Namespace("YahooStockPrice")
 
@@ -17,9 +17,8 @@ class YahooStockPriceGetter(Resource):
     @ns_yahoo_stock_price.expect(STOCK_CODE_PARSER)
     def get(self) -> {}:
         stock_code = request.args.get(self.STOCK_CODE)
-        stock_data = self.YAHOO_STOCK_PRICE_CONNECTOR.get_latest_stock_price(stock_code)
-
-        return stock_price_info_to_dict(stock_data)
+        stock_data = self.YAHOO_STOCK_PRICE_CONNECTOR.get_stock_quote(stock_code)
+        return stock_info_to_dict(stock_data)
 
 @ns_yahoo_stock_price.route('/yahoo-stock-code')
 class YahooStockCodeGetter(Resource):
@@ -29,5 +28,5 @@ class YahooStockCodeGetter(Resource):
     YAHOO_STOCK_PRICE_CONNECTOR = YahooStockPriceConnector()
 
     def get(self) -> []:
-        stock_codes = self.YAHOO_STOCK_PRICE_CONNECTOR.get_all_stock_code()
-        return stock_codes
+        stock_code = request.args.get(self.STOCK_CODE)
+        return self.YAHOO_STOCK_PRICE_CONNECTOR.get_yahoo_quotes(stock_code)

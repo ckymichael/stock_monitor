@@ -6,6 +6,10 @@
     "/YahooStockPrice/yahoo-stock-price": {
     "target": "http://localhost:5000/",
     "secure": false
+  },
+  "/YahooStockPrice/yahoo-stock-code": {
+    "target": "http://localhost:5000/",
+    "secure": false
   }
 
 }

@@ -14,6 +14,5 @@ export class StockMonitorDashboardComponent {
 
   stockSearchClicked($event, stockCodeInput: StockCodeInputComponent, appStockPriceTable: StockPriceTableComponent, refreshSlider: RefreshSilderComponent) {
     appStockPriceTable.addStockToMonitor(stockCodeInput.myControl.value);
-    console.log(refreshSlider);
   }
 }

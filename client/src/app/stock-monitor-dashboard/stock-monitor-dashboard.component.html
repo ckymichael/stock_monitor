@@ -10,12 +10,12 @@
                   (click)="stockSearchClicked($event, stockCodeInput, appStockPriceTable, refreshSlider)"><i class="material-icons">search</i>
           </button>
         </mat-grid-tile>
-        <mat-grid-tile [colspan]=15 [rowspan]=1>
+        <mat-grid-tile [colspan]=14 [rowspan]=1>
 
         </mat-grid-tile>
-        <mat-grid-tile [colspan]=5 [rowspan]=1>
-          <div style="position: absolute;right: 0px;bottom: 0px;height: 60%;">
-            Refresh Interval
+        <mat-grid-tile [colspan]=6 [rowspan]=1>
+          <div style="position: absolute;right: 10px;bottom: 0px;height: 60%;width: fit-content">
+            Auto refresh in {{ refreshSlider.value}}s
             <app-refresh-silder #refreshSlider></app-refresh-silder>
           </div>
         </mat-grid-tile>
