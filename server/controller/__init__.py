@@ -2,9 +2,9 @@ from server.controller.YahooStockPriceGetter import ns_yahoo_stock_price
 from flask_restplus import Api
 
 api = Api(
-    title='Live Stream scraper',
+    title='Live Stock Monitor',
     version='1.0',
-    description='Happy scraping',
+    description='Enjoy!!',
     doc='/document'
 )
 

@@ -1,6 +1,4 @@
 import os
-from datetime import datetime, timedelta
-from pandas_datareader import data as pdr
 from server.application import app
 
 if __name__ == '__main__':
