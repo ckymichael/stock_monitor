@@ -158,76 +158,81 @@ class StockInfo:
                          market_state, market, price)
 
     def to_dict(self) -> dict:
-        result: dict = {}
-        result["stock_code"] = self.stock_code
-        result["language"] = from_union([from_str, from_none], self.language)
-        result["region"] = from_union([from_str, from_none], self.region)
-        result["quoteType"] = from_union([from_str, from_none], self.quote_type)
-        result["currency"] = from_union([from_str, from_none], self.currency)
-        result["fiftyTwoWeekLowChangePercent"] = from_union([to_float, from_none],
-                                                            self.fifty_two_week_low_change_percent)
-        result["fiftyTwoWeekLowChange"] = from_union([to_float, from_none], self.fifty_two_week_low_change)
-        result["fiftyTwoWeekRange"] = from_union([from_str, from_none], self.fifty_two_week_range)
-        result["fiftyTwoWeekHighChange"] = from_union([to_float, from_none], self.fifty_two_week_high_change)
-        result["fiftyTwoWeekHighChangePercent"] = from_union([to_float, from_none],
-                                                             self.fifty_two_week_high_change_percent)
-        result["fiftyTwoWeekLow"] = from_union([to_float, from_none], self.fifty_two_week_low)
-        result["fiftyTwoWeekHigh"] = from_union([to_float, from_none], self.fifty_two_week_high)
-        result["dividendDate"] = from_union([from_int, from_none], self.dividend_date)
-        result["earningsTimestamp"] = from_union([from_int, from_none], self.earnings_timestamp)
-        result["earningsTimestampStart"] = from_union([from_int, from_none], self.earnings_timestamp_start)
-        result["earningsTimestampEnd"] = from_union([from_int, from_none], self.earnings_timestamp_end)
-        result["trailingAnnualDividendRate"] = from_union([to_float, from_none], self.trailing_annual_dividend_rate)
-        result["trailingPE"] = from_union([to_float, from_none], self.trailing_pe)
-        result["trailingAnnualDividendYield"] = from_union([to_float, from_none], self.trailing_annual_dividend_yield)
-        result["epsTrailingTwelveMonths"] = from_union([to_float, from_none], self.eps_trailing_twelve_months)
-        result["epsForward"] = from_union([to_float, from_none], self.eps_forward)
-        result["postMarketChangePercent"] = from_union([to_float, from_none], self.post_market_change_percent)
-        result["exchangeDataDelayedBy"] = from_union([from_int, from_none], self.exchange_data_delayed_by)
-        result["sharesOutstanding"] = from_union([from_int, from_none], self.shares_outstanding)
-        result["bookValue"] = from_union([to_float, from_none], self.book_value)
-        result["fiftyDayAverage"] = from_union([to_float, from_none], self.fifty_day_average)
-        result["fiftyDayAverageChange"] = from_union([to_float, from_none], self.fifty_day_average_change)
-        result["fiftyDayAverageChangePercent"] = from_union([to_float, from_none],
-                                                            self.fifty_day_average_change_percent)
-        result["twoHundredDayAverage"] = from_union([to_float, from_none], self.two_hundred_day_average)
-        result["twoHundredDayAverageChange"] = from_union([to_float, from_none], self.two_hundred_day_average_change)
-        result["twoHundredDayAverageChangePercent"] = from_union([to_float, from_none],
-                                                                 self.two_hundred_day_average_change_percent)
-        result["forwardPE"] = from_union([to_float, from_none], self.forward_pe)
-        result["marketCap"] = from_union([from_int, from_none], self.market_cap)
-        result["exchange"] = from_union([from_str, from_none], self.exchange)
-        result["priceHint"] = from_union([from_int, from_none], self.price_hint)
-        result["regularMarketPrice"] = from_union([to_float, from_none], self.regular_market_price)
-        result["regularMarketTime"] = from_union([from_int, from_none], self.regular_market_time)
-        result["regularMarketChange"] = from_union([to_float, from_none], self.regular_market_change)
-        result["regularMarketOpen"] = from_union([to_float, from_none], self.regular_market_open)
-        result["regularMarketDayHigh"] = from_union([to_float, from_none], self.regular_market_day_high)
-        result["regularMarketDayLow"] = from_union([to_float, from_none], self.regular_market_day_low)
-        result["regularMarketVolume"] = from_union([from_int, from_none], self.regular_market_volume)
-        result["postMarketTime"] = from_union([from_int, from_none], self.post_market_time)
-        result["postMarketPrice"] = from_union([to_float, from_none], self.post_market_price)
-        result["postMarketChange"] = from_union([to_float, from_none], self.post_market_change)
-        result["regularMarketChangePercent"] = from_union([to_float, from_none], self.regular_market_change_percent)
-        result["regularMarketDayRange"] = from_union([from_str, from_none], self.regular_market_day_range)
-        result["regularMarketPreviousClose"] = from_union([to_float, from_none], self.regular_market_previous_close)
-        result["messageBoardId"] = from_union([from_str, from_none], self.message_board_id)
-        result["fullExchangeName"] = from_union([from_str, from_none], self.full_exchange_name)
-        result["longName"] = from_union([from_str, from_none], self.long_name)
-        result["financialCurrency"] = from_union([from_str, from_none], self.financial_currency)
-        result["averageDailyVolume3Month"] = from_union([from_int, from_none], self.average_daily_volume3_month)
-        result["averageDailyVolume10Day"] = from_union([from_int, from_none], self.average_daily_volume10_day)
-        result["priceToBook"] = from_union([to_float, from_none], self.price_to_book)
-        result["sourceInterval"] = from_union([from_int, from_none], self.source_interval)
-        result["exchangeTimezoneName"] = from_union([from_str, from_none], self.exchange_timezone_name)
-        result["exchangeTimezoneShortName"] = from_union([from_str, from_none], self.exchange_timezone_short_name)
-        result["gmtOffSetMilliseconds"] = from_union([from_int, from_none], self.gmt_off_set_milliseconds)
-        result["esgPopulated"] = from_union([from_bool, from_none], self.esg_populated)
-        result["tradeable"] = from_union([from_bool, from_none], self.tradeable)
-        result["shortName"] = from_union([from_str, from_none], self.short_name)
-        result["marketState"] = from_union([from_str, from_none], self.market_state)
-        result["market"] = from_union([from_str, from_none], self.market)
-        result["price"] = from_union([to_float, from_none], self.price)
+        result: dict = {"stock_code": self.stock_code,
+                        "language": from_union([from_str, from_none], self.language),
+                        "region": from_union([from_str, from_none], self.region),
+                        "quoteType": from_union([from_str, from_none], self.quote_type),
+                        "currency": from_union([from_str, from_none], self.currency),
+                        "fiftyTwoWeekLowChangePercent": from_union([to_float, from_none],
+                                                                   self.fifty_two_week_low_change_percent),
+                        "fiftyTwoWeekLowChange": from_union([to_float, from_none], self.fifty_two_week_low_change),
+                        "fiftyTwoWeekRange": from_union([from_str, from_none], self.fifty_two_week_range),
+                        "fiftyTwoWeekHighChange": from_union([to_float, from_none], self.fifty_two_week_high_change),
+                        "fiftyTwoWeekHighChangePercent": from_union([to_float, from_none],
+                                                                    self.fifty_two_week_high_change_percent),
+                        "fiftyTwoWeekLow": from_union([to_float, from_none], self.fifty_two_week_low),
+                        "fiftyTwoWeekHigh": from_union([to_float, from_none], self.fifty_two_week_high),
+                        "dividendDate": from_union([from_int, from_none], self.dividend_date),
+                        "earningsTimestamp": from_union([from_int, from_none], self.earnings_timestamp),
+                        "earningsTimestampStart": from_union([from_int, from_none], self.earnings_timestamp_start),
+                        "earningsTimestampEnd": from_union([from_int, from_none], self.earnings_timestamp_end),
+                        "trailingAnnualDividendRate": from_union([to_float, from_none],
+                                                                 self.trailing_annual_dividend_rate),
+                        "trailingPE": from_union([to_float, from_none], self.trailing_pe),
+                        "trailingAnnualDividendYield": from_union([to_float, from_none],
+                                                                  self.trailing_annual_dividend_yield),
+                        "epsTrailingTwelveMonths": from_union([to_float, from_none], self.eps_trailing_twelve_months),
+                        "epsForward": from_union([to_float, from_none], self.eps_forward),
+                        "postMarketChangePercent": from_union([to_float, from_none], self.post_market_change_percent),
+                        "exchangeDataDelayedBy": from_union([from_int, from_none], self.exchange_data_delayed_by),
+                        "sharesOutstanding": from_union([from_int, from_none], self.shares_outstanding),
+                        "bookValue": from_union([to_float, from_none], self.book_value),
+                        "fiftyDayAverage": from_union([to_float, from_none], self.fifty_day_average),
+                        "fiftyDayAverageChange": from_union([to_float, from_none], self.fifty_day_average_change),
+                        "fiftyDayAverageChangePercent": from_union([to_float, from_none],
+                                                                   self.fifty_day_average_change_percent),
+                        "twoHundredDayAverage": from_union([to_float, from_none], self.two_hundred_day_average),
+                        "twoHundredDayAverageChange": from_union([to_float, from_none],
+                                                                 self.two_hundred_day_average_change),
+                        "twoHundredDayAverageChangePercent": from_union([to_float, from_none],
+                                                                        self.two_hundred_day_average_change_percent),
+                        "forwardPE": from_union([to_float, from_none], self.forward_pe),
+                        "marketCap": from_union([from_int, from_none], self.market_cap),
+                        "exchange": from_union([from_str, from_none], self.exchange),
+                        "priceHint": from_union([from_int, from_none], self.price_hint),
+                        "regularMarketPrice": from_union([to_float, from_none], self.regular_market_price),
+                        "regularMarketTime": from_union([from_int, from_none], self.regular_market_time),
+                        "regularMarketChange": from_union([to_float, from_none], self.regular_market_change),
+                        "regularMarketOpen": from_union([to_float, from_none], self.regular_market_open),
+                        "regularMarketDayHigh": from_union([to_float, from_none], self.regular_market_day_high),
+                        "regularMarketDayLow": from_union([to_float, from_none], self.regular_market_day_low),
+                        "regularMarketVolume": from_union([from_int, from_none], self.regular_market_volume),
+                        "postMarketTime": from_union([from_int, from_none], self.post_market_time),
+                        "postMarketPrice": from_union([to_float, from_none], self.post_market_price),
+                        "postMarketChange": from_union([to_float, from_none], self.post_market_change),
+                        "regularMarketChangePercent": from_union([to_float, from_none],
+                                                                 self.regular_market_change_percent),
+                        "regularMarketDayRange": from_union([from_str, from_none], self.regular_market_day_range),
+                        "regularMarketPreviousClose": from_union([to_float, from_none],
+                                                                 self.regular_market_previous_close),
+                        "messageBoardId": from_union([from_str, from_none], self.message_board_id),
+                        "fullExchangeName": from_union([from_str, from_none], self.full_exchange_name),
+                        "longName": from_union([from_str, from_none], self.long_name),
+                        "financialCurrency": from_union([from_str, from_none], self.financial_currency),
+                        "averageDailyVolume3Month": from_union([from_int, from_none], self.average_daily_volume3_month),
+                        "averageDailyVolume10Day": from_union([from_int, from_none], self.average_daily_volume10_day),
+                        "priceToBook": from_union([to_float, from_none], self.price_to_book),
+                        "sourceInterval": from_union([from_int, from_none], self.source_interval),
+                        "exchangeTimezoneName": from_union([from_str, from_none], self.exchange_timezone_name),
+                        "exchangeTimezoneShortName": from_union([from_str, from_none],
+                                                                self.exchange_timezone_short_name),
+                        "gmtOffSetMilliseconds": from_union([from_int, from_none], self.gmt_off_set_milliseconds),
+                        "esgPopulated": from_union([from_bool, from_none], self.esg_populated),
+                        "tradeable": from_union([from_bool, from_none], self.tradeable),
+                        "shortName": from_union([from_str, from_none], self.short_name),
+                        "marketState": from_union([from_str, from_none], self.market_state),
+                        "market": from_union([from_str, from_none], self.market),
+                        "price": from_union([to_float, from_none], self.price)}
         return result
 
 

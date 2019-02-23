@@ -32,10 +32,10 @@ class YahooStockPriceConnector:
         pdr.get_nasdaq_symbols()
         return sym['symbol'].to_list()
 
-    def get_yahoo_quotes(self, inputValue: str):
+    def get_yahoo_quotes(self, input_value: str):
         result = {}
         try:
-            result = requests.get(self.YAHOO_QUERY_URL_TEMPLATE.substitute(quote=inputValue)).json()
+            result = requests.get(self.YAHOO_QUERY_URL_TEMPLATE.substitute(quote=input_value)).json()
         except Exception as e:
             logging.error(e)
         return result

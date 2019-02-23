@@ -20,6 +20,7 @@ class YahooStockPriceGetter(Resource):
         stock_data = self.YAHOO_STOCK_PRICE_CONNECTOR.get_stock_quote(stock_code)
         return stock_info_to_dict(stock_data)
 
+
 @ns_yahoo_stock_price.route('/yahoo-stock-code')
 class YahooStockCodeGetter(Resource):
     STOCK_CODE = 'stockCode'

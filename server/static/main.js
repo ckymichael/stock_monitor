@@ -521,25 +521,45 @@ var StockPriceTableComponent = /** @class */ (function () {
         this.columnDefs = [
             { headerName: "Stock Code", field: "stock_code" },
             { headerName: "Market state", field: "marketState" },
-            { headerName: "Market cap", field: "marketCap" },
+            {
+                headerName: "Market cap", field: "marketCap", valueParser: numberValueParser, valueFormatter: function (params) {
+                    return formatNumber(params.value);
+                }
+            },
             { headerName: "Region", field: "region" },
             { headerName: "Quote type", field: "quoteType" },
             { headerName: "Currency", field: "currency" },
-            { headerName: "Open", field: "regularMarketOpen" },
-            { headerName: "High", field: "regularMarketDayHigh" },
-            { headerName: "Low", field: "regularMarketDayLow" },
-            { headerName: "200 day avg", field: "twoHundredDayAverage" },
+            {
+                headerName: "Open", field: "regularMarketOpen", valueParser: numberValueParser
+            },
+            {
+                headerName: "High", field: "regularMarketDayHigh", valueParser: numberValueParser
+            },
+            {
+                headerName: "Low", field: "regularMarketDayLow", valueParser: numberValueParser
+            },
+            {
+                headerName: "200 day avg", field: "twoHundredDayAverage", valueParser: numberValueParser, valueFormatter: function (params) {
+                    return formatNumber(params.value);
+                }
+            },
             {
                 headerName: "Price", field: "price", cellStyle: function (params) {
                     var color = numberToColor(params);
                     return { "background-color": color };
+                }, valueParser: numberValueParser
+            },
+            {
+                headerName: "Last changed", field: "changed", valueParser: numberValueParser
+            },
+            {
+                headerName: "Volume", field: "regularMarketVolume", valueParser: numberValueParser, valueFormatter: function (params) {
+                    return formatNumber(params.value);
                 }
             },
-            { headerName: "Last changed", field: "changed" },
-            { headerName: "Volume", field: "regularMarketVolume" },
         ];
         this.rowData = [];
-        this.rowSelection = "multiple";
+        this.rowSelection = "single";
         this.intervalObs = Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["interval"])(this.intervalTime * 1000).subscribe(function (value) {
             return console.log("Refreshing time" + _this.intervalTime * 1000);
         }, function (error1) { return console.error(error1); });
@@ -578,6 +598,8 @@ var StockPriceTableComponent = /** @class */ (function () {
         this.gridColumnApi = params.columnApi;
         this.gridApi.sizeColumnsToFit();
         this.gridApi.showLoadingOverlay();
+        var sort = [{ colId: "changed", sort: "desc" }];
+        this.gridApi.setSortModel(sort);
     };
     StockPriceTableComponent.setUpdatedStockInfo = function (stockToUpdate, data) {
         stockToUpdate.changed = data.price - stockToUpdate.price;
@@ -629,6 +651,14 @@ function numberToColor(param) {
     else if (param.data.changed < 0) {
         return "#ff513e";
     }
+}
+function numberValueParser(params) {
+    return Number(params.newValue);
+}
+function formatNumber(number) {
+    return Math.floor(number)
+        .toString()
+        .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
 }
 
 
