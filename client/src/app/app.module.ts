@@ -20,6 +20,10 @@ import { StockPriceTableComponent } from './stock-monitor-dashboard/stock-price-
 import {AgGridModule} from "ag-grid-angular";
 import {HttpClientModule} from "@angular/common/http";
 import { RefreshSilderComponent } from './stock-monitor-dashboard/refresh-silder/refresh-silder.component';
+import {ChartsModule} from 'ng2-charts';
+import { MovementChartComponent } from './stock-monitor-dashboard/movement-chart/movement-chart.component';
+import { PlotlyModule } from 'angular-plotly.js';
+import {CommonModule} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -28,8 +32,10 @@ import { RefreshSilderComponent } from './stock-monitor-dashboard/refresh-silder
     StockCodeInputComponent,
     StockPriceTableComponent,
     RefreshSilderComponent,
+    MovementChartComponent,
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
@@ -48,6 +54,8 @@ import { RefreshSilderComponent } from './stock-monitor-dashboard/refresh-silder
     MatInputModule,
     MatAutocompleteModule,
     LayoutModule,
+    ChartsModule,
+    PlotlyModule,
     AgGridModule.withComponents([])
   ],
   providers: [],

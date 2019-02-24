@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, EventEmitter} from '@angular/core';
 import {map} from 'rxjs/operators';
 import {Breakpoints, BreakpointObserver} from '@angular/cdk/layout';
 import {StockCodeInputComponent} from "./stock-code-input/stock-code-input.component";
@@ -14,5 +14,9 @@ export class StockMonitorDashboardComponent {
 
   stockSearchClicked($event, stockCodeInput: StockCodeInputComponent, appStockPriceTable: StockPriceTableComponent, refreshSlider: RefreshSilderComponent) {
     appStockPriceTable.addStockToMonitor(stockCodeInput.myControl.value);
+  }
+
+  setLineData(userRowClickedEvent: EventEmitter<number>) {
+    console.log(userRowClickedEvent)
   }
 }

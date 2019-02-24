@@ -1,0 +1,21 @@
+
+
+<div class="row">
+  <div class="col-md-6">
+    <div style="display: block;">
+      <canvas #mainChart="base-chart" baseChart width="400px" height="70px"
+              [datasets]="lineChartData"
+              [labels]="lineChartLabels"
+              [options]="lineChartOptions"
+              [colors]="lineChartColors"
+              [legend]="lineChartLegend"
+              [chartType]="lineChartType"
+              (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)">
+      </canvas>
+    </div>
+  </div>
+</div>
+
+
+<!--<plotly-plot #ploy [data]="graph.data" [layout]="graph.layout" [useResizeHandler]="true" (update)="functioUpdate(ploy, graphDiv)"></plotly-plot>-->

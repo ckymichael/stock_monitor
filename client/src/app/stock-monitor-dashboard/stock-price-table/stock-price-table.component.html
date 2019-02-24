@@ -9,5 +9,6 @@
   [rowSelection]="rowSelection"
   [enableCellChangeFlash]="true"
   [enableSorting]="true"
+  (rowClicked)="userRowClicked($event)"
   (gridReady)="onGridReady($event)"
 ></ag-grid-angular>

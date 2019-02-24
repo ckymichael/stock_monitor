@@ -25,10 +25,15 @@
 
 </mat-grid-list>
 
-<mat-grid-list cols="4" rowHeight="800px">
+<mat-grid-list cols="4" rowHeight="400px">
   <mat-grid-tile [colspan]=4 [rowspan]=1>
     <mat-card style="width: 90%;height: 90%">
-      <app-stock-price-table [intervalTime]=refreshSlider.value #appStockPriceTable></app-stock-price-table>
+      <app-stock-price-table #table [intervalTime]=refreshSlider.value #appStockPriceTable></app-stock-price-table>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]=4 [rowspan]=1>
+    <mat-card style="width: 90%;height: 90%">
+      <app-movement-chart [data]="table.userRowClickedEvent"></app-movement-chart>
     </mat-card>
   </mat-grid-tile>
 </mat-grid-list>
