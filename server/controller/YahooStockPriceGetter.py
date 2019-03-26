@@ -2,7 +2,6 @@ from flask import request
 from flask_restplus import Resource, Namespace
 
 from server.infrastructure.connector.YahooConnector import YahooStockPriceConnector
-from server.infrastructure.models.StockInfo import stock_info_to_dict
 
 ns_yahoo_stock_price = Namespace("YahooStockPrice")
 
@@ -18,7 +17,7 @@ class YahooStockPriceGetter(Resource):
     def get(self) -> {}:
         stock_code = request.args.get(self.STOCK_CODE)
         stock_data = self.YAHOO_STOCK_PRICE_CONNECTOR.get_stock_quote(stock_code)
-        return stock_info_to_dict(stock_data)
+        return stock_data.to_primitive()
 
 
 @ns_yahoo_stock_price.route('/yahoo-stock-code')
